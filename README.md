@@ -9,6 +9,10 @@
 
 ## Introduction
 
+**What is Pubmed?**
+
+**The Best Match Algorithm**
+
 ## Basic workflow
 
 - Investigate possible bias/inconsistency in the results returned by Pubmed's `Best Match algorithm` based on features of the article content/metadata
@@ -27,7 +31,10 @@
 
 ## Results
 
+</br></br>
+
 ## Dependencies
+</br></br>
 
 ## Team 
 - Avena Cheng
