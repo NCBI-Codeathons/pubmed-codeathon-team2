@@ -1,7 +1,9 @@
 ## Pubmed-codeathon-team2
 
+- [Abstract](#Abstract)
 - [Introduction](#Introduction)
 - [Basic workflow](#Basic-workflow)
+- [Example Usage](#Example-Usage)
 - [Results](#Results)
 - [Dependencies]((#Dependencies))
 - [Team](#Team)
@@ -28,6 +30,18 @@
     * Top 10 results retturned for the queries (from the log sample)
 
     3] To narrow the scope, we will begin by taking the 10 most popular/10 least popular queries in the provided dataset.
+
+## Dependencies
+- Python version >= 3
+- Required modules:
+* pandas 
+* numpy
+* xmltodict
+* requests
+* matplotlib
+* sklearn
+- You can easily install these with pip (Ex: pip install pandas)
+- Most other standard core modules should already be available on your system.
 
 ## Team 
 - Avena Cheng
