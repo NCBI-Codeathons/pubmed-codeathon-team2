@@ -34,12 +34,12 @@
 ## Dependencies
 - Python version >= 3
 - Required modules:
-* pandas 
-* numpy
-* xmltodict
-* requests
-* matplotlib
-* sklearn
+    * pandas 
+    * numpy
+    * xmltodict
+    * requests
+    * matplotlib
+    * sklearn
 - You can easily install these with pip (Ex: pip install pandas)
 - Most other standard core modules should already be available on your system.
 
