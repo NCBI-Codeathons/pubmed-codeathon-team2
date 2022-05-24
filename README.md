@@ -1,8 +1,5 @@
 ## Pubmed-codeathon-team2
 
-## Abstract
-</br></br>
-
 ## Table of Contents
 - [Introduction](#Introduction)
 - [Basic workflow](#Basic-workflow)
