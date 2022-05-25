@@ -1,3 +1,4 @@
+from sqlite3 import DateFromTicks
 import requests
 import xmltodict
 import json
@@ -152,4 +153,5 @@ def wrapper(ids):
         except Exception as e:
             print(e)
 
-    return all_parsed
+    df = pd.DataFrame(all_parsed)
+    return df
