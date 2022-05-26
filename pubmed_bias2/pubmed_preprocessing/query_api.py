@@ -81,8 +81,6 @@ def organize_query_results(queries):
     df['date_desc_res'] = df['date_desc'].apply(lambda x: list(x.keys()))
     df = df[['relevance_res', 'date_desc_res']]
 
-    print(my_pmid_status)
-
     return df, my_pmid_status
 
 # # Getting PMID metadata from Pubmed
