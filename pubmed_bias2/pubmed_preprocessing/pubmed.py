@@ -11,6 +11,7 @@ class SampleSet():
         self.pmid_metadata = self.retrieve_metadata()
         
     def gather_pmids(self):
+        '''Collects all PMIDs from the results returned from the API for each query by sort algo'''
         pmids = []
         res = self.results['relevance_res'].tolist() + self.results['date_desc_res'].tolist()
         for i in res:
@@ -24,6 +25,7 @@ class SampleSet():
         return pmids
     
     def retrieve_metadata(self):
+        '''Wrapper function to retrieve and parse the metadata for a list of PMIDs'''
         
         if self.testing_only:
             set_range = 2
@@ -47,6 +49,7 @@ class SampleSet():
 
         df = pd.DataFrame(all_parsed)
 
+        # maps the availability of fulltext to the PMID
         try:
             df['fulltext_status'] = df['pmid'].astype(str).map(self.fulltext_status)
         except Exception as e:

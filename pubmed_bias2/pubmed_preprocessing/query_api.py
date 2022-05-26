@@ -6,18 +6,22 @@ import pandas as pd
 from .features import *
 
 def make_pmid_query(ids):
+    '''Makes an API query for a list of PMIDs'''
     list_ids = ','.join(ids)
     return "https://eutilspreview.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id={}".format(list_ids)
 
 def make_freetext_query(query, sort_type, max=100):
+    '''Makes an API query for a query term and freetext filter applied'''
     #parsed = '+AND+'.join(query.split(' '))
     return "https://eutilspreview.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term={}+AND+ffrft[Filter]&sort={}&retmax={}".format(query, sort_type, max)
 
 def make_regular_query(query, sort_type, max=100):
+    '''Makes an API query for a query term, no freetext filter applied'''
     #parsed = '+AND+'.join(query.split(' '))
     return "https://eutilspreview.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term={}&sort={}&retmax={}".format(query, sort_type, max)
 
 def request_api(url):
+    '''Sends request to API and awaits response, returns response text'''
     count = 0
     while count < 15:
         r = requests.get(url)
@@ -32,6 +36,7 @@ def request_api(url):
 # # Getting Query results from Pubmed
 
 def get_pmids_by_query(query, sort_type):
+    '''Wrapper function to retrieve the PMIDs for each query and create a dictionary of their fulltext availability'''
    
     try:
         filt_url = make_freetext_query(query, sort_type)
@@ -58,6 +63,7 @@ def get_pmids_by_query(query, sort_type):
         return {}
 
 def collect_query_results(queries):
+    '''Wrapper function to get the PMIDs by query'''
     rel_sort = {}
     for i in queries:
         print(f"Getting PMID results for {i}")
@@ -70,6 +76,7 @@ def collect_query_results(queries):
     return rel_sort
 
 def organize_query_results(queries):
+    '''Wrapper function to create a dataframe for query results and dictionary for freetext availability'''
 
     my_pmid_status = {}
     results = collect_query_results(queries)
@@ -86,6 +93,7 @@ def organize_query_results(queries):
 # # Getting PMID metadata from Pubmed
 
 def extract_xml(text):
+    '''Wrapper function to extract features from XML data retrieved for each PMID'''
     parsed = []
     jsonString = json.dumps(xmltodict.parse(text))
     res = json.loads(jsonString)['PubmedArticleSet']['PubmedArticle']
