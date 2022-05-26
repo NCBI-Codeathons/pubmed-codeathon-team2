@@ -58,9 +58,41 @@ class pubmed_bias2():
         df1.pmid = df1.pmid.astype(str)
         return df1.merge(click_data, left_on='pmid', right_on='PMID',how='left').drop(columns=['PMID'])
     
+    
+    def organize_query(df_q, query):
+        df = pd.DataFrame(df_q.loc[query,'relevance_res'],columns=['PMID'])
+        df['query']=query
+        df['sort'] = 'relevance_res'
+        df['rank'] = df.index+1
+
+        df1 = pd.DataFrame(df_q.loc[query,'date_desc_res'],columns=['PMID'])
+        df1['query']=query
+        df1['sort'] = 'date_desc_res'
+        df1['rank'] = df1.index+1
+
+        return pd.concat([df,df1])
+
+    def merge_query_meta(df1, df2):
+
+        row=0
+        for i in df1.index.to_list():
+            if row==0:
+                query_meta_df = organize_query(df1, i)
+                row +=1
+            else:
+                query_meta_df = pd.concat([query_meta_df, organize_query(df1, i)])
+                row+=1
+
+        query_meta_df.PMID = query_meta_df.PMID.astype(str)
+        df2.pmid = df2.pmid.astype(str)
+        return query_meta_df.merge(df2, left_on='PMID', right_on='pmid', how='left').drop(columns=['pmid'])
+
     def save_pubmed(self):
-        self.data_one_hot.to_csv(self.output_path + self.filename + ".csv")
-        self.data_one_hot.to_pickle(self.output_path + self.filename + '.pkl')
+        self.data_full.to_csv(self.output_path + self.filename + "_data_full.csv")
+        self.data_full.to_pickle(self.output_path + self.filename + '_data_full.pkl')
+        
+        self.data_query_meta.to_csv(self.output_path + self.filename + "data_query_meta.csv")
+        self.data_query_meta.to_pickle(self.output_path + self.filename + 'data_query_meta.pkl')
         
     def run_pipeline(self):
         '''
@@ -78,6 +110,7 @@ class pubmed_bias2():
         print("one-hot encode pubtypes")
         self.data_one_hot = one_hot_a_column(self.metadata, 'pubtype')
         self.data_full = pubmed_bias2.merge_click_data(self.data_one_hot, self.output_path + 'click_data1.tsv')
+        self.data_query_meta = merge_query_meta(new_df_obj.results, new_df_obj.data_full)
         print("save to csv and pkl")
         pubmed_bias2.save_pubmed(self)
         return self
