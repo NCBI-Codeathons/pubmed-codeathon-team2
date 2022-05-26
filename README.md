@@ -11,29 +11,31 @@
 
 ## Introduction
 
-- **What is Pubmed?**
+We investigated possible bias/inconsistency in the results returned by Pubmed's "Best Match" search algorithm. We compared the distributions of selected article content/metadata features for the articles returned by high-frequency versus low-frequency health condition queries.
 
-- **The Best Match Algorithm**
+- **The PubMed database** contains more than 34 million citations and abstracts of biomedical literature. PubMed does not include full text journal articles; however, links to the full text are often available from other sources, such as the publisher's website or the PubMed Central (PMC) repository.
+
+- **The Best Match Algorithm** analyzes each PubMed article citation returned for a search query. The calculated citation "weight" depends on how many search terms are found and in which fields. Recently-published articles get a somewhat higher weight. Then, the top articles returned by the weighted term frequency algorithm are re-ranked for better relevance by a machine-learning algorithm. Best Match is not designed for comprehensive or systematic searches. <a href="https://support.nlm.nih.gov/knowledgebase/article/KA-03719/en-us">See more information on Best Match</a>.
 
 ## Basic workflow
 
-1] Investigate possible bias/inconsistency in the results returned by Pubmed's `Best Match algorithm` based on features of the article content/metadata
-
-2] Create datasets to understand the distribution of PubMed search results with regard to:
+1] Create datasets to understand the distribution of PubMed search results with regard to:
 * Abstract type (unstructured, structured, none), 
 * Full-text availability (proxy for paywalled articles), and 
 * Publication type(s) (Ex: Clinical trial, Review, etc)
 
-3] We will create these distributions for each of the three following citation sets: 
+2] To narrow the scope, we restrict our focus to 10 most popular/10 least popular informational health condition queries in the provided dataset
+* Top 10 queries: breast cancer, alzheimer's disease, covid 19, cancer, lung cancer, obesity, multiple sclerosis, diabetes mellitus, gastric cancer, ferroptosis
+* Bottom 10 queries: allergies, cardiac ischemia, neurodegenerative disease, depression in older adults, adverse drug reactions, neuroinflammation, vasculitis, hypoxia, acute kidney injury, pulmonary embolism
+
+3] Create these distributions for each of the three following citation sets: 
 * Total results of the queries (retrieved live during the codeathon), 
 * Articles the users click on (from the log sample), and 
-* Top 10 results retturned for the queries (from the log sample)
+* The first page results = the top 10 results returned for the queries (from the log sample)
 
-4] To narrow the scope, we will begin by taking the 10 most popular/10 least popular queries in the provided dataset
+4] Compare the results and make observations
 
-5] Compare the results and make observations
-
-6] If there is a bias, investigate it using the entire dataset
+5] If there is a bias, investigate it using the entire dataset
 
 ## Dependencies
 - Python version >= 3
