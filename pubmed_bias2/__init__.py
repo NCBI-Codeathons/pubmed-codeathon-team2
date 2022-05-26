@@ -76,6 +76,16 @@ class pubmed_bias2():
     
     
     def organize_query(df_q, query):
+        '''
+        Create a new dataframe for the top/bottom 10 query results that gives one PMID per row and populates columns for features.
+        Top and bottom 10 dataframes are concatenated to create one dataframe as output.
+        INPUTS:
+        df_q: (dataframe, required) a pandas dataframe that contains the results of multiple queries. Each row is a query.
+        query: (str, required) the query string
+        
+        OUTPUT:
+        a new dataframe that is concatenated for top and bottom results from the query
+        '''
         df = pd.DataFrame(df_q.loc[query,'relevance_res'],columns=['PMID'])
         df['query']=query
         df['sort'] = 'relevance_res'
@@ -89,6 +99,15 @@ class pubmed_bias2():
         return pd.concat([df,df1])
 
     def merge_query_meta(df1, df2):
+        '''
+        Concatenate multiple dataframes together for multiple queries. Merge these query results with the metatdata for each pmid. Binarize the fulltext status
+        INPUT:
+        df1: (dataframe) a dataframe of the query results. one query per row
+        df2: (dataframe) the metadata per PMID
+        
+        OUTPUT:
+        dataframe of all the info joined on PMID
+        '''
 
         row=0
         for i in df1.index.to_list():
@@ -107,6 +126,9 @@ class pubmed_bias2():
         return query_meta_df
 
     def save_pubmed(self):
+        '''
+        Save the results to .csv and .pkl files
+        '''
         self.data_full.to_csv(self.output_path + self.filename + "_full.csv")
         self.data_full.to_pickle(self.output_path + self.filename + '_full.pkl')
         
