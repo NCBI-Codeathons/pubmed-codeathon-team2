@@ -8,6 +8,7 @@
 - [Dependencies](#Dependencies)
 - [Team](#Team)
 - [Acknowledgment](#Acknowledgment)
+- [References](#References)
 - [License](#License)
 
 ## Introduction
@@ -96,6 +97,12 @@ We investigated possible bias/inconsistency in the results returned by Pubmed's 
 - Summer Rankin
 ## Acknowledgment
 - We would like to thank the `NIH National Library of Medicine/National Center for Biotechnology Information` for providing all the required computational resources during the codeathon.
+## References
+- Fiorini N, Canese K, Starchenko G, Kireev E, Kim W, Miller V, Osipov M, Kholodov M, Ismagilov R, Mohan S, Ostell J, Lu Z. Best Match: New relevance search for PubMed. PLoS Biol. 2018 Aug 28;16(8):e2005343. doi: 10.1371/journal.pbio.2005343. PMID: 30153250; PMCID: PMC6112631.
+- Fiorini N, Leaman R, Lipman DJ, Lu Z. How user intelligence is improving PubMed. Nat Biotechnol. 2018 Oct 1. doi: 10.1038/nbt.4267. Epub ahead of print. PMID: 30272675.
+- Kiester L, Turp C. Artificial intelligence behind the scenes: PubMed's Best Match algorithm. J Med Libr Assoc. 2022 Jan 1;110(1):15-22. doi: 10.5195/jmla.2022.1236. PMID: 35210958; PMCID: PMC8830327.
+- National Library of Medicine. PubMed Overview National Library of Medicine [cited May 27 2022]. https://pubmed.ncbi.nlm.nih.gov/about/.
+- National Library of Medicine. Welcome to Medical Subject Headings [cited May 27 2022]. https://www.nlm.nih.gov/mesh/meshhome.html.
 
 ## License
 Licensed under MIT License - Copyright (c) 2022 NCBI-Codeathons (Refer LICENSE file for more details)
