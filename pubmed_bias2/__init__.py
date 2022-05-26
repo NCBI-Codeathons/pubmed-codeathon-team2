@@ -9,9 +9,7 @@ import numpy as np
 import requests
 import xmltodict
 import json
-
 from .pubmed_preprocessing import get_click_data, get_pmids, parse_save, count_sort_algorithm, one_hot_a_column
-
 class pubmed_bias2():
     def __init__(self,
                  input_file='pubmed-data.tsv',
@@ -60,6 +58,7 @@ class pubmed_bias2():
         '''
         Run the full pipeline for analyzing bias from team 2
         '''
+
         get_click_data(self)
         self.raw_data = pubmed_bias2.load_data(self)
         print("get PMIDS")
