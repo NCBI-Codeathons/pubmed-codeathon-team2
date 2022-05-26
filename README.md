@@ -20,18 +20,18 @@ We investigated possible bias/inconsistency in the results returned by Pubmed's 
 
 ## Basic workflow
 
-1] Query Selection
+**1] Query Selection**
 - To narrow our scope, we selected twenty health-related informational (as opposed to navigational) processed search queries from the provided PubMed log data sample. 
 - The search queries met these criteria:
     * Each result received ≥ 1 user click
     * No interface filters applied by user
     * No PubMed field tag 
     * No number sign 
-        -> Ex: #1 AND #2
+        * Ex: #1 AND #2
     * No orthographic variants 
-        -> Ex: covid 19; covid-19
+        * Ex: covid 19; covid-19
     * No synonyms 
-        -> covid 19; covid
+        * covid 19; covid
 - Additionally, the top ten queries met the following criteria:
     * Run on ≥ 7 unique dates
     * Associated with ≥ 38 user ids
@@ -40,31 +40,31 @@ We investigated possible bias/inconsistency in the results returned by Pubmed's 
     * Associated with ≥ 2 user IDs
     * Returned ≥ 100 results on average across different sample dates
 
-2] Retrieval of Article Features (using the PubMed beta API - May 2022)
+**2] Retrieval of Article Features (using the PubMed beta API - May 2022)**
 - Following feature were extracted for each article:
     * `Abstract type` 
-        -> Unstructured
-        -> Structured
-        -> No abstract
+        * Unstructured
+        * Structured
+        * No abstract
     * `Full-text availability` 
-        -> Proxy for paywalled articles
+        * Proxy for paywalled articles
     * `Publication type(s)` 
-        -> Ex: Clinical trial, Review, etc
+        * Ex: Clinical trial, Review, etc
     * `Sort type` 
-        -> Best match vs Reverse chronological date
+        * Best match vs Reverse chronological date
     * `Article Title`
     * `Journal` 
     * `Entrez Date`
 - Additionally, the count of user clicks of each PMIDs displayed on the first page of search was extracted from the pubmed log file (for each algorithm)
 
-3] Creating distributions for the following 3 datasets:
+**3] Creating distributions for the following 3 datasets:**
 - Total results of the queries (retrieved live during the codeathon), 
 - Articles the users click on (from the log sample), and 
 - The top 10 results returned for the queries (from the log sample)
 
-4] Integration into a single pipeline
+**4] Integration into a single pipeline**
 
-5] Performing a `Chi-squared test` to compare above distributions to the baseline distributions
+**5] Performing a `Chi-squared test` to compare above distributions to the baseline distributions**
 ## Final Dataset
 - The provided search history file contained approximately `7 million` unique PMIDs
 - The ten most popular queries retrieved included:
@@ -95,7 +95,7 @@ We investigated possible bias/inconsistency in the results returned by Pubmed's 
 - Savita Shrivastava
 - Summer Rankin
 ## Acknowledgment
-- We would like to thank the `NIH National Library of Medicine/National Center for Biotechnology Information` for providing all the required computational resources during the codeathon
+- We would like to thank the `NIH National Library of Medicine/National Center for Biotechnology Information` for providing all the required computational resources during the codeathon.
 
 ## License
 Licensed under MIT License - Copyright (c) 2022 NCBI-Codeathons (Refer LICENSE file for more details)
