@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 def get_click_data(self):
         outfile = open(self.output_path + "click_data_with_query.tsv", "w")
+=======
+def get_click_data(input_path, input_file, output_path):
+        outfile = open(output_path + "click_data1.tsv", "w")
+>>>>>>> f13552c3605063f77d9171fcedc78ad1a28ac83d
         pmids_with_click = {}
         
         def _create_dict(algorithm):
@@ -13,7 +18,7 @@ def get_click_data(self):
                 else:
                     pmids_with_click[elm[0]][algorithm] = pmids_with_click[elm[0]][algorithm] + 1
 
-        with open(self.input_path + self.input_file) as tsv:
+        with open(input_path + input_file) as tsv:
             for line in tsv:
                 line = line.rstrip()
                 if line.startswith("search_id"):continue

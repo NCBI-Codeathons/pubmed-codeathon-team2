@@ -67,7 +67,7 @@ class pubmed_bias2():
         Run the full pipeline for analyzing bias from team 2
         '''
 
-        get_click_data(self)
+        get_click_data(self.input_path, self.input_file, self.output_path)
         self.raw_data = pubmed_bias2.load_data(self)
         print("get PMIDS")
         #self.data_pmid, self._most_common, self._most_common_ids, self.most_common_dict = get_pmids(self.raw_data)
