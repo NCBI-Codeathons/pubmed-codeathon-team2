@@ -79,8 +79,17 @@ class SampleSet():
     
 if __name__ == "__main__":
 
-    samples = SampleSet(QUERIES, testing_only=True)
+    testing_only = True
+    queries = QUERIES
+    if testing_only:
+        queries = queries[:2]
+    print(f"Starting pipeline (testing only set to {testing_only}) using queries: {queries}")
+    samples = SampleSet(queries, testing_only)
     metadata = samples.pmid_metadata
-    save_path = check_filepath(path='/data/team2', fname='pmid_metadata', ext='pkl')
-    metadata.to_pkl(save_path)
-    print("Saved PMID metadata")
+    if not testing_only:
+        save_path = check_filepath(path='/data/team2', fname='pmid_metadata', ext='pkl')
+        metadata.to_pkl(save_path)
+        print("Saved PMID metadata")
+    else:
+        print(metadata.head())
+        print(f"Shape of metadata: {metadata.shape}")

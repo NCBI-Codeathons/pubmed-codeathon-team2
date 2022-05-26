@@ -36,11 +36,11 @@ def get_pmids_by_query(query, sort_type):
     try:
         filt_url = make_freetext_query(query, sort_type)
         r = request_api(filt_url)
-        filt_pmids = xmltodict.parse(r.text)['eSearchResult']['IdList']['Id']
+        filt_pmids = xmltodict.parse(r)['eSearchResult']['IdList']['Id']
 
         reg_url = make_regular_query(query, sort_type)
         r = request_api(reg_url)
-        reg_pmids = xmltodict.parse(r.text)['eSearchResult']['IdList']['Id']
+        reg_pmids = xmltodict.parse(r)['eSearchResult']['IdList']['Id']
 
         overlap = set(reg_pmids).intersection(filt_pmids)
     
@@ -60,6 +60,7 @@ def get_pmids_by_query(query, sort_type):
 def collect_query_results(queries):
     rel_sort = {}
     for i in queries:
+        print(f"Getting PMID results for {i}")
         rel_dict = get_pmids_by_query(query=i, sort_type='relevance')
         date_dict = get_pmids_by_query(query=i, sort_type='date_desc')
         rel_sort[i] = {
