@@ -1,5 +1,5 @@
 # +
-# #!/usr/bin/env python
+# # !/usr/bin/env python
 # -*- coding: UTF-8 -*-
 
 from collections import Counter
@@ -23,13 +23,15 @@ class pubmed_bias2():
                  input_file='pubmed-data.tsv',
                  input_path='/data/', 
                  output_path = '/data/team2/', 
-                 filename='processed_pubmed_data'
+                 filename='processed_pubmed_data',
+                 click_data_filename = 'click_data_1'
                  ):
         
         self.input_path = input_path
         self.input_file = input_file
         self.output_path = output_path
         self.filename = filename
+        self.click_data_filename = click_data_filename
         
     def load_data(self):
         try:
@@ -85,30 +87,33 @@ class pubmed_bias2():
 
         query_meta_df.PMID = query_meta_df.PMID.astype(str)
         df2.pmid = df2.pmid.astype(str)
-        return query_meta_df.merge(df2, left_on='PMID', right_on='pmid', how='left').drop(columns=['pmid'])
+        query_meta_df = query_meta_df.merge(df2, left_on='PMID', right_on='pmid', how='left').drop(columns=['pmid'])
+        query_meta_df['fulltext_status'] = query_meta_df['fulltext_status'].astype('category')
+        query_meta_df['has_fulltext']= query_meta_df['fulltext_status'].cat.codes
+        return query_meta_df
 
     def save_pubmed(self):
-        self.data_full.to_csv(self.output_path + self.filename + "_data_full.csv")
-        self.data_full.to_pickle(self.output_path + self.filename + '_data_full.pkl')
+        self.data_full.to_csv(self.output_path + self.filename + "_full.csv")
+        self.data_full.to_pickle(self.output_path + self.filename + '_full.pkl')
         
-        self.data_query_meta.to_csv(self.output_path + self.filename + "data_query_meta.csv")
-        self.data_query_meta.to_pickle(self.output_path + self.filename + 'data_query_meta.pkl')
+        self.data_query_meta.to_csv(self.output_path + self.filename + "_query_meta.csv")
+        self.data_query_meta.to_pickle(self.output_path + self.filename + '_query_meta.pkl')
         
     def run_pipeline(self):
         '''
         Run the full pipeline for analyzing bias from team 2
         '''
 
-        get_click_data(self.input_path, self.input_file, self.output_path)
+        get_click_data(self.input_path, self.input_file, self.output_path, self.click_data_filename)
         self.raw_data = pubmed_bias2.load_data(self)
         print("get PMIDS")
         #self.summary_sort_algo = count_sort_algorithm(self.data_pmid)
         self.samples = SampleSet(QUERIES, testing_only=False)
         self.results = self.samples.results
         self.metadata = self.samples.pmid_metadata
-        print("one-hot encode pubtypes")
-        self.data_one_hot = one_hot_a_column(self.metadata, 'pubtype')
-        self.data_full = pubmed_bias2.merge_click_data(self.data_one_hot, self.output_path + 'click_data1.tsv')
+        #print("one-hot encode pubtypes")
+        #self.data_one_hot = one_hot_a_column(self.metadata, 'pubtype')
+        self.data_full = pubmed_bias2.merge_click_data(self.metadata, self.output_path + self.click_data_filename + '.tsv')
         self.data_query_meta = pubmed_bias2.merge_query_meta(self.results, self.data_full)
         print("save to csv and pkl")
         pubmed_bias2.save_pubmed(self)
