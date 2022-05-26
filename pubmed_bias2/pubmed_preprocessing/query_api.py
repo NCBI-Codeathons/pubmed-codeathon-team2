@@ -9,13 +9,13 @@ def make_pmid_query(ids):
     list_ids = ','.join(ids)
     return "https://eutilspreview.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id={}".format(list_ids)
 
-def make_freetext_query(query, sort_type):
+def make_freetext_query(query, sort_type, max=100):
     #parsed = '+AND+'.join(query.split(' '))
-    return "https://eutilspreview.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term={}+AND+ffrft[Filter]&sort={}&retmax=100000".format(query, sort_type)
+    return "https://eutilspreview.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term={}+AND+ffrft[Filter]&sort={}&retmax={}".format(query, sort_type, max)
     
-def make_regular_query(query, sort_type):
+def make_regular_query(query, sort_type, max=100):
     #parsed = '+AND+'.join(query.split(' '))
-    return "https://eutilspreview.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term={}&sort={}&retmax=100000".format(query, sort_type)
+    return "https://eutilspreview.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term={}&sort={}&retmax={}".format(query, sort_type, max)
 
 def request_api(url):
     count = 0
