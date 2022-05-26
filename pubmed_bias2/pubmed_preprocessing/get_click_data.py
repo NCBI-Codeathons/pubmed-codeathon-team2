@@ -1,10 +1,11 @@
 def get_click_data(self):
-        outfile = open(self.output_path + "click_data1.tsv", "w")
+        outfile = open(self.output_path + "click_data_with_query.tsv", "w")
         pmids_with_click = {}
         
         def _create_dict(algorithm):
             for each in click_data_values:
                 elm = each.split(",")
+                elm[0] = elm[0] + '/' + processed_query
                 if elm[0] not in pmids_with_click:
                     pmids_with_click[elm[0]] = {}
                 if algorithm not in pmids_with_click[elm[0]]:
@@ -21,6 +22,8 @@ def get_click_data(self):
                 pmid = cols[6]
                 click_data = cols[7]
                 sort_alg = cols[3]
+                processed_query = cols[11]
+                
 
                 if click_data != "NoClicks":
                     click_data_values = click_data.split("*result_click,")
@@ -38,5 +41,8 @@ def get_click_data(self):
                 date_count = alg_counts["date"]
             if "relevance" in alg_counts:
                 relevance_count = alg_counts["relevance"]
-            stext = str(pid)+"\t"+str(date_count)+"\t"+str(relevance_count)+"\n"
+            spl = pid.split('/')
+            stext = str(spl[0])+"\t"+str(spl[1])+"\t"+str(date_count)+"\t"+str(relevance_count)+"\n"
             outfile.write(stext)
+
+
