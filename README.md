@@ -65,7 +65,7 @@ We investigated possible bias/inconsistency in the results returned by Pubmed's 
 
 **4] Integration into a single pipeline**
 
-**5] Performing a `Chi-squared test` to compare above distributions to the baseline distributions**
+**5] Performing a statistical test - `Pearson's Chi-squared test` to compare above distributions to the baseline distributions**
 ## Final Dataset
 - The provided search history file contained approximately `7 million` unique PMIDs
 - The ten most popular queries retrieved included:
