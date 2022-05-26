@@ -87,11 +87,15 @@ if __name__ == "__main__":
         queries = queries[:2]
     print(f"Starting pipeline (testing only set to {testing_only}) using queries: {queries}")
     samples = SampleSet(queries, testing_only)
+    results = samples.results
     metadata = samples.pmid_metadata
     if not testing_only:
-        save_path = check_filepath(path='data/team2', fname='pmid_metadata', ext='.pkl')
-        metadata.to_pickle(save_path)
+        meta_save_path = check_filepath(path='data/team2', fname='pmid_metadata', ext='.pkl')
+        metadata.to_pickle(meta_save_path)
         print("Saved PMID metadata")
+        results_save_path = check_filepath(path='data/team2', fname='query_results', ext='.csv')
+        results.to_csv(results_save_path)
+        print("Saved query results")
     else:
         print(metadata.head())
         print(f"Shape of metadata: {metadata.shape}")
