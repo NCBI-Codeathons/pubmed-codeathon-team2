@@ -34,6 +34,9 @@ class pubmed_bias2():
         self.click_data_filename = click_data_filename
         
     def load_data(self):
+        '''
+        Import a .tsv or .csv file
+        '''
         try:
             if  self.input_file.split('.')[1] == 'tsv':
                 raw_data = pd.read_csv(self.input_path + self.input_file, sep='\t')
@@ -53,6 +56,17 @@ class pubmed_bias2():
         return raw_data
     
     def merge_click_data(df1, click_filename):
+        '''
+        Merge a dataframe with metadata with the click data.
+        
+        Inputs:
+        df1: (dataframe) a pandas dataframe that contains the pmid (one per row) in a column named "pmid" and any other columns of metadata.
+        click_filename: (str,required) the full path and name of the .tsv file where the counts of clicks per pmid are stored e.g. "/data/team2/click_data_1"
+        
+        Outputs:
+        df1: (dataframe) the two dataframes merged on the PMID
+        '''
+        
         click_data = pd.read_csv(click_filename, sep='\t')
         click_data.rename(columns={'date':'clicks_date_sort','relevance': 'clicks_relevance_sort'},inplace=True)
         click_data.PMID = click_data.PMID.astype(str)
