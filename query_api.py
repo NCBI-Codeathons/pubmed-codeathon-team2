@@ -14,7 +14,7 @@ def make_freetext_query(query, sort_type):
     return "https://eutilspreview.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term={}+AND+ffrft[Filter]&sort={}&retmax=100000".format(query, sort_type)
     
 def make_regular_query(query, sort_type):
-    #arsed = '+AND+'.join(query.split(' '))
+    #parsed = '+AND+'.join(query.split(' '))
     return "https://eutilspreview.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term={}&sort={}&retmax=100000".format(query, sort_type)
 
 def request_api(url):
@@ -80,7 +80,9 @@ def organize_query_results(queries):
     df['relevance_res'] = df['relevance'].apply(lambda x: list(x.keys()))
     df['date_desc_res'] = df['date_desc'].apply(lambda x: list(x.keys()))
     df = df[['relevance_res', 'date_desc_res']]
-    
+
+    print(my_pmid_status)
+
     return df, my_pmid_status
 
 ## Getting PMID metadata from Pubmed

@@ -7,12 +7,12 @@ QUERIES = SampleQueries.BOTTOM_10_QUERIES + SampleQueries.TOP_10_QUERIES
 def check_filepath(path, fname, ext):
     '''Check if filepath is available before saving, otherwise make new version'''
     
-    fullpath = os.path.join(path, fname, ext)
+    fullpath = os.path.join(path, fname + ext)
     if os.path.exists(fullpath):
-        print("This path already exists, making a copy")
+        print("This path already exists, making a new version")
         for x in range(50):
             version = '_v' + str(x)
-            fullpath = os.path.join(path, fname + version, ext)
+            fullpath = os.path.join(path, fname + version + ext)
             if os.path.exists(fullpath):
                 continue
             else:
@@ -41,8 +41,10 @@ class SampleSet():
         for i in res:
             if type(i) == str:
                 list_ids = i.lstrip('[').strip(']').split(', ')
-                ids = [i.lstrip("'").strip("'") for i in list_ids]
-                pmids.extend(ids)
+                ids = [i.lstrip("'").strip("'") for i in list_ids] 
+            elif type(i) == list:
+                ids = i
+            pmids.extend(ids)
         
         return pmids
     
@@ -71,7 +73,7 @@ class SampleSet():
         df = pd.DataFrame(all_parsed)
 
         try:
-            df['fulltext_status'] = df['pmid'].map(self.fulltext_status)
+            df['fulltext_status'] = df['pmid'].astype(str).map(self.fulltext_status)
         except Exception as e:
             print(e)
         
@@ -79,7 +81,7 @@ class SampleSet():
     
 if __name__ == "__main__":
 
-    testing_only = True
+    testing_only = False
     queries = QUERIES
     if testing_only:
         queries = queries[:2]
@@ -87,8 +89,8 @@ if __name__ == "__main__":
     samples = SampleSet(queries, testing_only)
     metadata = samples.pmid_metadata
     if not testing_only:
-        save_path = check_filepath(path='/data/team2', fname='pmid_metadata', ext='pkl')
-        metadata.to_pkl(save_path)
+        save_path = check_filepath(path='data/team2', fname='pmid_metadata', ext='.pkl')
+        metadata.to_pickle(save_path)
         print("Saved PMID metadata")
     else:
         print(metadata.head())
