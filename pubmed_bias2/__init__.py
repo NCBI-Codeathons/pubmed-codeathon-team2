@@ -77,10 +77,10 @@ class pubmed_bias2():
         row=0
         for i in df1.index.to_list():
             if row==0:
-                query_meta_df = organize_query(df1, i)
+                query_meta_df = pubmed_bias2.organize_query(df1, i)
                 row +=1
             else:
-                query_meta_df = pd.concat([query_meta_df, organize_query(df1, i)])
+                query_meta_df = pd.concat([query_meta_df, pubmed_bias2.organize_query(df1, i)])
                 row+=1
 
         query_meta_df.PMID = query_meta_df.PMID.astype(str)
@@ -102,7 +102,6 @@ class pubmed_bias2():
         get_click_data(self.input_path, self.input_file, self.output_path)
         self.raw_data = pubmed_bias2.load_data(self)
         print("get PMIDS")
-        #self.data_pmid, self._most_common, self._most_common_ids, self.most_common_dict = get_pmids(self.raw_data)
         #self.summary_sort_algo = count_sort_algorithm(self.data_pmid)
         self.samples = SampleSet(QUERIES, testing_only=False)
         self.results = self.samples.results
@@ -110,14 +109,7 @@ class pubmed_bias2():
         print("one-hot encode pubtypes")
         self.data_one_hot = one_hot_a_column(self.metadata, 'pubtype')
         self.data_full = pubmed_bias2.merge_click_data(self.data_one_hot, self.output_path + 'click_data1.tsv')
-        self.data_query_meta = merge_query_meta(new_df_obj.results, new_df_obj.data_full)
+        self.data_query_meta = pubmed_bias2.merge_query_meta(self.results, self.data_full)
         print("save to csv and pkl")
         pubmed_bias2.save_pubmed(self)
         return self
-    
-#if __name__ == '__main__':
-  #  main()       
-    
-        
-        
-
