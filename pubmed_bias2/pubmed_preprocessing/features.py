@@ -63,21 +63,6 @@ def get_articleDate(record):
     try:
         return record['MedlineCitation']['Article']['ArticleDate']
     except Exception as e:
-        print(e)
-        return ''
-
-def get_dateCompleted(record):
-    try:
-        return record['MedlineCitation']['DateCompleted']
-    except Exception as e:
-        print(e)
-        return ''
-
-def get_dateRevised(record):
-    try:
-        return record['MedlineCitation']['DateCompleted']
-    except Exception as e:
-        print(e)
         return ''
 
 def parse_date(date):
