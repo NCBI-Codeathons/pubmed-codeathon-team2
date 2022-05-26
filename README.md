@@ -68,7 +68,7 @@ We investigated possible bias/inconsistency in the results returned by Pubmed's 
 ## Final Dataset
 - The provided search history file contained approximately `7 million` unique PMIDs
 - The ten most popular queries retrieved included:
-    * breast cancer, alzheimer's disease, covid 19, cancer, lung cancer, obesity, multiple sclerosis, diabetes mellitus, gastric cancer, 
+    * breast cancer, alzheimer's disease, covid 19, cancer, lung cancer, obesity, multiple sclerosis, diabetes mellitus, gastric cancer, and ferroptosis
 - The bottom ten queries (chosen from approximately 600 candidates) included:
     * allergies, cardiac ischemia, neurodegenerative disease, depression in older adults, adverse drug reactions, neuroinflammation, vasculitis, hypoxia, acute kidney injury, pulmonary embolism
 - For each algorithm, we retieved and analyzed the first 100 results 
