@@ -31,7 +31,7 @@ We investigated possible bias/inconsistency in the results returned by Pubmed's 
     * No orthographic variants 
         * Ex: covid 19; covid-19
     * No synonyms 
-        * covid 19; covid
+        * Ex: covid 19; covid
 - Additionally, the top ten queries met the following criteria:
     * Run on ≥ 7 unique dates
     * Associated with ≥ 38 user ids
@@ -71,7 +71,7 @@ We investigated possible bias/inconsistency in the results returned by Pubmed's 
     * breast cancer, alzheimer's disease, covid 19, cancer, lung cancer, obesity, multiple sclerosis, diabetes mellitus, gastric cancer, 
 - The bottom ten queries (chosen from approximately 600 candidates) included:
     * allergies, cardiac ischemia, neurodegenerative disease, depression in older adults, adverse drug reactions, neuroinflammation, vasculitis, hypoxia, acute kidney injury, pulmonary embolism
-- For each algorithm, we retieved and analyzed first 100 results 
+- For each algorithm, we retieved and analyzed the first 100 results 
 
 ## Dependencies
 - Python version >= 3
