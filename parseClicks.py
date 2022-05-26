@@ -1,5 +1,7 @@
 # +
-outfile = open("/data/team2/click_data.tsv", "w")
+
+
+outfile = open("/data/team2/click_data1.tsv", "w")
 pmids_with_click = {}
 def _create_dict(algorithm):
     for each in click_data_values:
@@ -40,7 +42,36 @@ for pid, alg_counts in pmids_with_click.items():
     outfile.write(stext)
 print("Done")
 # -
+stext
+
+# +
+import pandas as pd
+
+df = pd.read_csv('/data/team2/click_data.tsv', sep='\t')
+df
+# -
 
 
+fpath = '/data/pubmed-data.tsv'
+data = pd.read_csv(fpath, sep='\t')
+
+# +
+cancer_df = pd.read_csv('/data/team2/top10data/cancer.csv')
+cancer_df['PMID'] = cancer_df['PMID'].apply(lambda x: x.split(','))
+exploded_df = cancer_df.explode('PMID')
+exploded_df = exploded_df.drop_duplicates('PMID')
 
 
+top_10_query_PMIDs = pd.read_csv('/data/team2/top_10_query_PMIDs_v2.csv').drop('Unnamed: 0', axis=1)
+top_10_query_PMIDs['PMID'] = top_10_query_PMIDs['pmid'].astype(str)
+
+# adding hasAbstract, hasStructuredAbstract, pubtype
+merged_df = exploded_df.merge(top_10_query_PMIDs, how='left', on = 'PMID')
+
+# adding one-hot encoded publication types
+merged_df1 = merged_df.join(pd.get_dummies(merged_df.pubtype, prefix='pubtype'))
+# -
+
+len(data)
+
+ dff = data.merge(df, on=)

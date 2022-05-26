@@ -21,7 +21,7 @@ def get_abstract(record):
         print("Did not retrieve an abstract")
     
     return abstract, hasStructuredAbstract
-    
+
 def get_pubtype(record):
     pubs = []
     try:
@@ -58,7 +58,7 @@ def get_entrez_date(record):
         print(e)
     
     return entrez
-    
+
 def get_articleDate(record):
     try:
         return record['MedlineCitation']['Article']['ArticleDate']

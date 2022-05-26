@@ -4,7 +4,7 @@ import xmltodict
 import json
 import time
 import pandas as pd
-from features import *
+from .features import *
 
 def make_pmid_query(ids):
     list_ids = ','.join(ids)
@@ -13,7 +13,7 @@ def make_pmid_query(ids):
 def make_freetext_query(query, sort_type):
     #parsed = '+AND+'.join(query.split(' '))
     return "https://eutilspreview.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term={}+AND+ffrft[Filter]&sort={}&retmax=10000".format(query, sort_type)
-    
+
 def make_regular_query(query, sort_type):
     #arsed = '+AND+'.join(query.split(' '))
     return "https://eutilspreview.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term={}&sort={}&retmax=10000".format(query, sort_type)
@@ -30,7 +30,7 @@ def request_api(url):
     
     return r.text
 
-## Getting Query results from Pubmed
+# # Getting Query results from Pubmed
 
 def get_pmids_by_query(query, sort_type):
    
@@ -100,8 +100,8 @@ def combine_top_bottom(top, bottom):
     
     return results_df, fulltext_df
 
-## Getting PMID metadata from Pubmed
-    
+# # Getting PMID metadata from Pubmed
+
 def extract_xml(text):
     parsed = []
     jsonString = json.dumps(xmltodict.parse(text))
