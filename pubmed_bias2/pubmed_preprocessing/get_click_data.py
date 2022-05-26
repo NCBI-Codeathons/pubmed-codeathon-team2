@@ -1,6 +1,6 @@
 # +
 
-def get_click_data(input_path, input_file, output_path):
+def get_click_data(input_path, input_file, output_path, click_data_filename):
     '''
     Inputs
     :input_path: str, 
@@ -14,7 +14,7 @@ def get_click_data(input_path, input_file, output_path):
     This file is structured as follows
     <PMID>    <Processed Query>    <# of Clicks for Reverse Chronological Sorting>    <# of Clicks for Best Match>
     '''
-    outfile = open(output_path + "click_data2.tsv", "w")
+    outfile = open(output_path + click_data_filename + ".tsv", "w")
     pmids_with_click = {}
         
     def _create_dict(algorithm):
