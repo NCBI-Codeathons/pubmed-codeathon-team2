@@ -12,7 +12,7 @@ import xmltodict
 import json
 from .config import SampleQueries
 from .pubmed_preprocessing.pubmed import SampleSet
-from .pubmed_preprocessing import get_click_data, get_pmids, parse_save, count_sort_algorithm, one_hot_a_column
+from .pubmed_preprocessing import get_click_data, one_hot_a_column
 
 QUERIES = SampleQueries.BOTTOM_10_QUERIES + SampleQueries.TOP_10_QUERIES
 
@@ -56,7 +56,7 @@ class pubmed_bias2():
         click_data.PMID = click_data.PMID.astype(str)
         
         df1.pmid = df1.pmid.astype(str)
-        return df1.merge(click_data, left_on='pmid', right_on='PMID',how='left').drop(columns=['pmid'])
+        return df1.merge(click_data, left_on='pmid', right_on='PMID',how='left').drop(columns=['PMID'])
     
     def save_pubmed(self):
         self.data_one_hot.to_csv(self.output_path + self.filename + ".csv")
