@@ -1,4 +1,3 @@
-from sqlite3 import DateFromTicks
 import requests
 import xmltodict
 import json
@@ -12,11 +11,11 @@ def make_pmid_query(ids):
 
 def make_freetext_query(query, sort_type):
     #parsed = '+AND+'.join(query.split(' '))
-    return "https://eutilspreview.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term={}+AND+ffrft[Filter]&sort={}&retmax=10000".format(query, sort_type)
+    return "https://eutilspreview.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term={}+AND+ffrft[Filter]&sort={}&retmax=100000".format(query, sort_type)
     
 def make_regular_query(query, sort_type):
     #arsed = '+AND+'.join(query.split(' '))
-    return "https://eutilspreview.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term={}&sort={}&retmax=10000".format(query, sort_type)
+    return "https://eutilspreview.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term={}&sort={}&retmax=100000".format(query, sort_type)
 
 def request_api(url):
     count = 0
@@ -69,36 +68,19 @@ def collect_query_results(queries):
         }
     return rel_sort
 
-def make_results_df(mydict, query_type):
-    df = pd.DataFrame(mydict).T
+def organize_query_results(queries):
+
+    my_pmid_status = {}
+    results = collect_query_results(queries)
+    for i in results.keys():
+        my_pmid_status.update(results[i]['relevance'])
+        my_pmid_status.update(results[i]['date_desc'])
+    df = pd.DataFrame(results).T
     df['relevance_res'] = df['relevance'].apply(lambda x: list(x.keys()))
     df['date_desc_res'] = df['date_desc'].apply(lambda x: list(x.keys()))
     df = df[['relevance_res', 'date_desc_res']]
-    df['query_type'] = query_type
-
-    return df
-
-def combine_top_bottom(top, bottom):
-
-    my_pmid_status = {}
-    top_results = collect_query_results(top)
-    for i in top_results.keys():
-        my_pmid_status.update(top_results[i]['relevance'])
-        my_pmid_status.update(top_results[i]['date_desc'])
-
-    top_df = make_results_df(top_results)
-
-    bottom_results = collect_query_results(bottom)
-    for i in bottom_results.keys():
-        my_pmid_status.update(bottom_results[i]['relevance'])
-        my_pmid_status.update(bottom_results[i]['date_desc'])
-
-    bottom_df = make_results_df(bottom_results)
     
-    results_df = pd.concat([top_df, bottom_df])
-    fulltext_df = pd.DataFrame.from_dict(my_pmid_status, orient='index')
-    
-    return results_df, fulltext_df
+    return df, my_pmid_status
 
 ## Getting PMID metadata from Pubmed
     
@@ -133,25 +115,3 @@ def extract_xml(text):
             print(e)
     
     return parsed
-
-def wrapper(ids):
-    
-    set_range = len(ids) // 10 + 1
-    start = 0
-    all_parsed = []
-    for i in range(set_range):
-        print(i)
-        try:
-            stop = start + 10
-            chunk = ids[start:stop]
-            url = make_pmid_query(chunk)
-            resp = request_api(url)
-            parsed = extract_xml(resp)
-            all_parsed.extend(parsed)
-            start += 10
-            time.sleep(0.35)
-        except Exception as e:
-            print(e)
-
-    df = pd.DataFrame(all_parsed)
-    return df
