@@ -1,6 +1,7 @@
 # +
 # #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
+
 from collections import Counter
 import pandas as pd
 import sklearn
@@ -9,8 +10,15 @@ import numpy as np
 import requests
 import xmltodict
 import json
+from .config import SampleQueries
+from .pubmed_preprocessing.pubmed import SampleSet
 from .pubmed_preprocessing import get_click_data, get_pmids, parse_save, count_sort_algorithm, one_hot_a_column
+
+QUERIES = SampleQueries.BOTTOM_10_QUERIES + SampleQueries.TOP_10_QUERIES
+
 class pubmed_bias2():
+
+
     def __init__(self,
                  input_file='pubmed-data.tsv',
                  input_path='/data/', 
@@ -48,7 +56,7 @@ class pubmed_bias2():
         click_data.PMID = click_data.PMID.astype(str)
         
         df1.pmid = df1.pmid.astype(str)
-        return df1.merge(click_data, left_on='pmid', right_on='PMID',how='left')
+        return df1.merge(click_data, left_on='pmid', right_on='PMID',how='left').drop(columns=['pmid'])
     
     def save_pubmed(self):
         self.data_one_hot.to_csv(self.output_path + self.filename + ".csv")
@@ -62,11 +70,13 @@ class pubmed_bias2():
         get_click_data(self)
         self.raw_data = pubmed_bias2.load_data(self)
         print("get PMIDS")
-        self.data_pmid, self._most_common, self._most_common_ids, self.most_common_dict = get_pmids(self.raw_data)
-        self.summary_sort_algo = count_sort_algorithm(self.data_pmid)
-        self.data_parsed = parse_save(self)
+        #self.data_pmid, self._most_common, self._most_common_ids, self.most_common_dict = get_pmids(self.raw_data)
+        #self.summary_sort_algo = count_sort_algorithm(self.data_pmid)
+        self.samples = SampleSet(QUERIES, testing_only=False)
+        self.results = self.samples.results
+        self.metadata = self.samples.pmid_metadata
         print("one-hot encode pubtypes")
-        self.data_one_hot = one_hot_a_column(self.data_parsed, 'pubtype')
+        self.data_one_hot = one_hot_a_column(self.metadata, 'pubtype')
         self.data_full = pubmed_bias2.merge_click_data(self.data_one_hot, self.output_path + 'click_data1.tsv')
         print("save to csv and pkl")
         pubmed_bias2.save_pubmed(self)

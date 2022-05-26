@@ -1,4 +1,4 @@
-from pubmed_preprocessing.query_api import *
+from .query_api import *
 
 class SampleSet():
 

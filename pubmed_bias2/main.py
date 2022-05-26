@@ -24,7 +24,7 @@ def check_filepath(path, fname, ext):
         print(f"Available filepath: {fullpath}")
     
     return fullpath
-    
+
 if __name__ == "__main__":
 
     testing_only = False
