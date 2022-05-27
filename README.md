@@ -72,7 +72,7 @@ We investigated possible bias/inconsistency in the results returned by Pubmed's 
     * breast cancer, alzheimer's disease, covid 19, cancer, lung cancer, obesity, multiple sclerosis, diabetes mellitus, gastric cancer, and ferroptosis
 - The bottom ten queries (chosen from approximately 600 candidates) included:
     * allergies, cardiac ischemia, neurodegenerative disease, depression in older adults, adverse drug reactions, neuroinflammation, vasculitis, hypoxia, acute kidney injury, pulmonary embolism
-- For each algorithm, we retieved and analyzed the first 100 results 
+- For each algorithm, we considered top 100 results returned as the baseline
 
 ## Dependencies
 - Python version >= 3
@@ -96,7 +96,7 @@ We investigated possible bias/inconsistency in the results returned by Pubmed's 
 - Savita Shrivastava
 - Summer Rankin
 ## Acknowledgment
-- We would like to thank the `NIH National Library of Medicine/National Center for Biotechnology Information` for providing all the required computational resources during the codeathon.
+- We would like to thank the **NIH National Library of Medicine/National Center for Biotechnology Information** for providing all the required computational resources during the codeathon.
 ## References
 - Fiorini N, Canese K, Starchenko G, Kireev E, Kim W, Miller V, Osipov M, Kholodov M, Ismagilov R, Mohan S, Ostell J, Lu Z. Best Match: New relevance search for PubMed. PLoS Biol. 2018 Aug 28;16(8):e2005343. doi: 10.1371/journal.pbio.2005343. PMID: 30153250; PMCID: PMC6112631.
 - Fiorini N, Leaman R, Lipman DJ, Lu Z. How user intelligence is improving PubMed. Nat Biotechnol. 2018 Oct 1. doi: 10.1038/nbt.4267. Epub ahead of print. PMID: 30272675.
