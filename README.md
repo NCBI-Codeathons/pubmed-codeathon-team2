@@ -84,6 +84,10 @@ We investigated possible bias/inconsistency in the results returned by Pubmed's 
     * No significant difference in full-text availability, structured abstract status, or presence of an abstract were uncovered
     * This indicates that the bias in ranking was not introduced for high frequency vs low frequency searches
 
+<img width="1014" alt="Abstracts" src="https://user-images.githubusercontent.com/74168582/170767982-da8bfa75-d018-4608-9eb3-8178b6e1b31e.png">
+<img width="1016" alt="Strcutured_Abstracts" src="https://user-images.githubusercontent.com/74168582/170768001-f9037f2f-3543-4970-8ea0-b88cf50529a8.png">
+<img width="1018" alt="Fulltext" src="https://user-images.githubusercontent.com/74168582/170768014-01435c7f-6bcf-44b8-9b61-76df31cb62dc.png">
+
 ## Dependencies
 - Python version >= 3
 - Required modules:
