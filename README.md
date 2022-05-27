@@ -120,3 +120,13 @@ We investigated possible bias/inconsistency in the results returned by Pubmed's 
 
 ## License
 Licensed under MIT License - Copyright (c) 2022 NCBI-Codeathons (Refer LICENSE file for more details)
+
+## Import & Save
+To import the data in jupyter hub see the notebook [import_save.ipynb](import_save.ipynb)
+
+## Preprocess
+[retrieving-PMID-data.ipynb](retrieving-PMID-data.ipynb)
+
+### One-hot encode pubtype
+[one-hot-encode.ipynb](one-hot-encode.ipynb)
+
