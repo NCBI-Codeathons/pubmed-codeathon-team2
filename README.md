@@ -2,7 +2,7 @@
 
 ## Table of Contents
 - [Introduction](#Introduction)
-- [Basic workflow](#Basic-workflow)
+- [Methodology](#Methodology)
 - [Final Dataset](#Final-Dataset)
 - [Results](#Results)
 - [Dependencies](#Dependencies)
@@ -19,7 +19,7 @@ We investigated possible bias/inconsistency in the results returned by Pubmed's 
 
 - **The Best Match Algorithm** analyzes each PubMed article citation returned for a search query. The calculated citation "weight" depends on how many search terms are found and in which fields. Recently-published articles get a somewhat higher weight. Then, the top articles returned by the weighted term frequency algorithm are re-ranked for better relevance by a machine-learning algorithm. Best Match is not designed for comprehensive or systematic searches. <a href="https://support.nlm.nih.gov/knowledgebase/article/KA-03719/en-us">See more information on Best Match</a>.
 
-## Basic workflow
+## Methodology
 
 **1] Query Selection**
 - To narrow our scope, we selected twenty health-related informational (as opposed to navigational) processed search queries from the provided PubMed log data sample. 
@@ -65,14 +65,21 @@ We investigated possible bias/inconsistency in the results returned by Pubmed's 
 
 **4] Integration into a single pipeline**
 
-**5] Performing a statistical test - `Pearson's Chi-squared test` to compare above distributions to the baseline distributions**
+**5] Performing a statistical test (Pearson's Chi-squared test)` to compare above distributions to the baseline distributions**
 ## Final Dataset
-- The provided search history file contained approximately `7 million` unique PMIDs
+- The provided search history file contained approximately **7 million** unique PMIDs
 - The ten most popular queries retrieved included:
     * breast cancer, alzheimer's disease, covid 19, cancer, lung cancer, obesity, multiple sclerosis, diabetes mellitus, gastric cancer, and ferroptosis
 - The bottom ten queries (chosen from approximately 600 candidates) included:
-    * allergies, cardiac ischemia, neurodegenerative disease, depression in older adults, adverse drug reactions, neuroinflammation, vasculitis, hypoxia, acute kidney injury, pulmonary embolism
+    * allergies, cardiac ischemia, neurodegenerative disease, depression in older adults, adverse drug reactions, neuroinflammation, vasculitis, hypoxia, acute kidney injury, and pulmonary embolism
 - For each algorithm, we considered top 100 results returned as the baseline
+## Results
+- High-frequency searches:
+    * The most recent citations (via date sort) were much less likely to have full text available
+    * This is probably due to publisher embargos on full-text access
+- Running statistical tests using the top 100 results as a baseline:
+    * No significant difference in full-text availability, structured abstract status, or presence of an abstract were uncovered
+    * This indicates that the bias in ranking was not introduced for high frequency vs low frequency searches
 
 ## Dependencies
 - Python version >= 3
