@@ -73,7 +73,7 @@ We investigated possible bias/inconsistency in the results returned by Pubmed's 
 - The bottom ten queries (chosen from approximately 600 candidates) included:
     * allergies, cardiac ischemia, neurodegenerative disease, depression in older adults, adverse drug reactions, neuroinflammation, vasculitis, hypoxia, acute kidney injury, and pulmonary embolism
 - For each algorithm, we considered top 100 results returned as the baseline
-- The below figure shows a sample dataframe produced by the pipeline for the query term `allergies`
+- The figure below shows a sample dataframe produced by the pipeline for the query term `allergies`
  <img width="1750" alt="SampleDF_allergies" src="https://user-images.githubusercontent.com/74168582/170765487-5b39ddcb-7461-4490-815d-ea24101c54c8.png">
 
 ## Results
