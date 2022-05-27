@@ -108,7 +108,7 @@ We investigated possible bias/inconsistency in the results returned by Pubmed's 
 - Manoj M Wagle
 - Melanie Huston
 - Savita Shrivastava
-- [Summer Rankin](www.summerrankin.com)
+- [Summer Rankin](https://www.summerrankin.com)
 
 ## Acknowledgment
 - We would like to thank the **NIH National Library of Medicine/National Center for Biotechnology Information** for providing all the required computational resources during the codeathon.
