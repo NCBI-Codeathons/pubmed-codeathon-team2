@@ -56,6 +56,9 @@ We investigated possible bias/inconsistency in the results returned by Pubmed's 
     * `Article Title`
     * `Journal` 
     * `Entrez Date`
+    * 'Journal Publication Date`
+    * `Article Date`
+    * `Processes Query`
 - Additionally, the count of user clicks of each PMIDs displayed on the first page of search was extracted from the pubmed log file (for each algorithm)
 
 **3] Creating distributions for the following 3 datasets:**
