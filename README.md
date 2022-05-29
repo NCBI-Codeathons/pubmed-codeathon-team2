@@ -105,7 +105,7 @@ We investigated possible bias/inconsistency in the results returned by Pubmed's 
 - Kate Dowdy
 - Leo Meister
 - Lydia Jones
-- Manoj M Wagle
+- [Manoj M Wagle](https://github.com/manojmw)
 - Melanie Huston
 - Savita Shrivastava
 - [Summer Rankin](https://www.summerrankin.com)
